@@ -1,13 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using IssueTracker.Core.Entities;
+using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Core.Services.Impl
+namespace IssueTracker.Core.Services.IssueService.Impl
 {
-    internal class IssueService : IIssueService
+    class IssueService : IIssueService
     {
+        private readonly IIssueRepository _repository;
+
+        public IssueService(IIssueRepository repository)
+        {
+            _repository = repository;
+        }
+
         public Guid? AddIssue(string title)
         {
-            throw new NotImplementedException();
+            var issue = new Issue()
+            {
+                Title = title
+            };
+
+            var created = _repository.Create(issue);
+            return created.Id;
         }
 
         public void RemoveIssue(Guid issueId)

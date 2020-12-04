@@ -1,19 +1,26 @@
-using System;
-using IssueTracker.Core.Services;
-using IssueTracker.Core.Services.Impl;
+using IssueTracker.Core.Repositories;
+using IssueTracker.Core.Services.IssueService;
+using IssueTracker.Core.Services.IssueService.Impl;
+using IssueTracker.Core.Services.UserService;
+using IssueTracker.Core.Services.UserService.Impl;
+using IssueTracker.Data.Repositories;
 using Xunit;
 
 namespace IssueTracker.Test
 {
     public class IssueTests
     {
+        private readonly IIssueRepository _issueRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IIssueService _issueService;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
         public IssueTests()
         {
-            _issueService = new IssueService();
-            _userService = new UserService();
+            _issueRepository = new IssueRepository();
+            _userRepository = new UserRepository();
+            _issueService = new IssueService(_issueRepository);
+            _userService = new UserService(_userRepository);
         }
 
         [Fact]
@@ -26,7 +33,13 @@ namespace IssueTracker.Test
             Assert.NotNull(issueId);
 
             _issueService.AssignUser(userId.Value, issueId.Value);
-            _issueService.SetIssueState(issueId.Value, IssueState.InProgressState, "I'm on it!");
+            _issueService.SetIssueState(issueId.Value, IssueState.InProgress, "I'm on it!");
+        }
+
+        [Fact]
+        public void AddIssue()
+        {
+            _issueService.AddIssue("Issue 1");
         }
     }
 }

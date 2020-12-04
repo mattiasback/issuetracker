@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IssueTracker.Core.Services
+namespace IssueTracker.Core.Services.IssueService
 {
     public interface IIssueService
     {
