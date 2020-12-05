@@ -9,9 +9,8 @@ namespace IssueTracker.Core.Services.IssueService
         /// Add an issue with the given title.
         /// </summary>
         /// <param name="title">Title of the issue.</param>
-        /// <returns>A unique identifier for the added issue.
-        /// Returns null if no issue could be created.</returns>
-        Guid? AddIssue(string title);
+        /// <returns>A unique identifier for the added issue.</returns>
+        Guid AddIssue(string title);
 
         /// <summary>
         /// Remove an issue completely.
@@ -51,14 +50,14 @@ namespace IssueTracker.Core.Services.IssueService
         /// <param name="endDate">Optional end date filter.</param>
         /// <returns>Returns a list of issues based on the selected filtering.
         /// An empty list is returned if no issues found.</returns>
-        IList<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
+        IEnumerable<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
             DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
 
         /// <summary>
         /// Get a specific issue matching the unique identifier provided.
         /// </summary>
         /// <param name="issueId">Unique identifier of the issue.</param>
-        /// <returns>Returns the specified issue or null if not found.</returns>
+        /// <returns>Returns the specified issue.</returns>
         IssueDto GetIssue(Guid issueId);
     }
 }

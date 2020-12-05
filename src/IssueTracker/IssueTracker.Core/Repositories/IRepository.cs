@@ -8,8 +8,8 @@ namespace IssueTracker.Core.Repositories
     {
         T Create(T entity);
         T GetById(Guid id);
-        IList<T> GetAll();
+        IEnumerable<T> GetAll();
         T Update(T entity);
-        void Delete(T entity);
+        void Delete(Guid id);
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 
 namespace IssueTracker.Core.Services.UserService.Impl
@@ -13,24 +15,25 @@ namespace IssueTracker.Core.Services.UserService.Impl
             _repository = repository;
         }
 
-        public Guid? AddUser(string name)
+        public Guid AddUser(string name)
         {
-            throw new NotImplementedException();
+            var user = new User {Name = name};
+            return _repository.Create(user).Id;
         }
 
         public void RemoveUser(Guid userId)
         {
-            throw new NotImplementedException();
+            _repository.Delete(userId);
         }
 
-        public IList<UserDto> GetUsers()
+        public IEnumerable<UserDto> GetUsers()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll().Select(u => u.MapToDto());
         }
 
         public UserDto GetUser(Guid userId)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(userId).MapToDto();
         }
     }
 }

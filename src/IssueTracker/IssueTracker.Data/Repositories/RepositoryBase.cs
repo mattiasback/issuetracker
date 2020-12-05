@@ -28,15 +28,18 @@ namespace IssueTracker.Data.Repositories
 
         public T GetById(Guid id)
         {
+            if (!_database.ContainsKey(id))
+                throw new ArgumentException($"ID:{id} not found in database!");
+
             return _database[id];
         }
 
-        public IList<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             if (_database.Count == 0)
                 return new List<T>();
 
-            return _database.Values.ToList();
+            return _database.Values;
         }
 
         public T Update(T entity)
@@ -50,15 +53,12 @@ namespace IssueTracker.Data.Repositories
             return _database[entity.Id] = entity;
         }
 
-        public void Delete(T entity)
+        public void Delete(Guid id)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
+            if (!_database.ContainsKey(id))
+                throw new ArgumentException($"ID:{id} not found in database!");
 
-            if (!_database.ContainsKey(entity.Id))
-                throw new ArgumentException($"ID:{entity.Id} not found in database!");
-
-            _database.Remove(entity.Id);
+            _database.Remove(id);
         }
     }
 }

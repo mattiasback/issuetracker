@@ -1,3 +1,4 @@
+using System.Linq;
 using IssueTracker.Core.Repositories;
 using IssueTracker.Core.Services.IssueService;
 using IssueTracker.Core.Services.IssueService.Impl;
@@ -19,21 +20,32 @@ namespace IssueTracker.Test
         {
             _issueRepository = new IssueRepository();
             _userRepository = new UserRepository();
-            _issueService = new IssueService(_issueRepository);
+            _issueService = new IssueService(_issueRepository, _userRepository);
             _userService = new UserService(_userRepository);
         }
 
         [Fact]
         public void TestScenario1()
         {
-            var userId = _userService.AddUser("Steve");
-            var issueId = _issueService.AddIssue("The app crashes on login.");
+            //ASSIGN
+            var name = "Steve";
+            var title = "The app crashes on login.";
+            var state = IssueState.InProgress;
+            var comment = "I'm on it!";
 
-            Assert.NotNull(userId);
-            Assert.NotNull(issueId);
+            //ACT
+            var userId = _userService.AddUser(name);
+            var issueId = _issueService.AddIssue(title);
+            _issueService.AssignUser(userId, issueId);
+            _issueService.SetIssueState(issueId, state, comment);
 
-            _issueService.AssignUser(userId.Value, issueId.Value);
-            _issueService.SetIssueState(issueId.Value, IssueState.InProgress, "I'm on it!");
+            //ASSERT
+            var issue = _issueRepository.GetById(issueId);
+            Assert.Equal(userId, issue.AssignedUser.Id);
+            Assert.Equal(name, issue.AssignedUser.Name);
+            Assert.Equal(title, issue.Title);
+            Assert.Equal(state, issue.State);
+            Assert.Equal(comment, issue.Comments.First().Text);
         }
 
         [Fact]

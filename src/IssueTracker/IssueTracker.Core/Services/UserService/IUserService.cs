@@ -9,9 +9,8 @@ namespace IssueTracker.Core.Services.UserService
         /// Add a user by name.
         /// </summary>
         /// <param name="name"></param>
-        /// <returns>Returns a unique identifier for the created user.
-        /// Returns null if no user was created.</returns>
-        Guid? AddUser(string name);
+        /// <returns>Returns a unique identifier for the created user.</returns>
+        Guid AddUser(string name);
 
         /// <summary>
         /// Remove a user completely and remove from any issues this user is currently assigned to.
@@ -24,13 +23,13 @@ namespace IssueTracker.Core.Services.UserService
         /// </summary>
         /// <returns>A collection of all users.
         /// An empty list is returned if no users found.</returns>
-        IList<UserDto> GetUsers();
+        IEnumerable<UserDto> GetUsers();
 
         /// <summary>
         /// Get a specific user matching the unique identifier provided.
         /// </summary>
         /// <param name="userId"></param>
-        /// <returns>Returns the specified user or null if not found.</returns>
+        /// <returns>Returns the specified user.</returns>
         UserDto GetUser(Guid userId);
     }
 }

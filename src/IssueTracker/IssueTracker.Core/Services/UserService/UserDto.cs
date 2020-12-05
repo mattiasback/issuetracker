@@ -6,7 +6,7 @@ namespace IssueTracker.Core.Services.UserService
 {
     public class UserDto
     {
-        public Guid userId { get; set; }
+        public Guid UserId { get; set; }
         public string Name { get; set; }
         public IList<IssueDto> AssignedIssues { get; set; } = new List<IssueDto>();
     }
