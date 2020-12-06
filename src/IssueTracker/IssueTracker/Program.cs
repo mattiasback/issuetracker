@@ -13,7 +13,7 @@ namespace IssueTracker
 
             //Setup DI
             var serviceProvider = new ServiceCollection()
-                //.AddIssueTracker()
+                .AddIssueTracker()
                 .BuildServiceProvider();
 
             //External 
