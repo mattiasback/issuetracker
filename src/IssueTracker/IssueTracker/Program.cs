@@ -16,9 +16,24 @@ namespace IssueTracker
                 .AddIssueTracker()
                 .BuildServiceProvider();
 
-            //External 
-            var issueService = serviceProvider.GetService<IIssueService>();
-            var issueId = issueService.AddIssue("Issue1");
+            //Example usage
+            var example = new ExampleClass(serviceProvider.GetService<IIssueService>());
+            var issueId = example.AddIssue("Issue1");
+        }
+
+        class ExampleClass
+        {
+            private readonly IIssueService _service;
+
+            public ExampleClass(IIssueService service)
+            {
+                _service = service;
+            }
+
+            public Guid AddIssue(string title)
+            {
+                return _service.AddIssue(title);
+            }
         }
     }
 }

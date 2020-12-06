@@ -73,8 +73,8 @@ namespace IssueTracker.Test
             var issue = _issueRepository.GetById(issueId);
             Assert.Equal(issueId, issue.Id);
             Assert.Equal(state, (IssueStateDto)issue.State);
-            //var expectedTransition = new StateTransition(IssueState.ToDo, state, _time.GetUtcNow()
-            //Assert.Equal(), issue.StateHistory[0]);
+            var expectedTransition = new StateTransition(IssueState.ToDo, issue.State, _time.GetUtcNow());
+            Assert.Equal(expectedTransition, issue.StateHistory[0]);
             Assert.Equal(comment, issue.Comments[0].Text);
         }
 
@@ -82,8 +82,10 @@ namespace IssueTracker.Test
         public void AssignUser()
         {
             //ARRANGE
+            var issueId = _issueService.AddIssue("Issue1");
 
             //ACT
+            _issueService.AssignUser();
 
             //ASSERT
         }

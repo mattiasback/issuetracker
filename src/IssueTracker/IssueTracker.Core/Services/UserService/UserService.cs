@@ -17,8 +17,7 @@ namespace IssueTracker.Core.Services.UserService
 
         public Guid AddUser(string name)
         {
-            var user = new User {Name = name};
-            return _repository.Create(user).Id;
+            return _repository.Create(new User(name)).Id;
         }
 
         public void RemoveUser(Guid userId)
