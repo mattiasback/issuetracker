@@ -73,8 +73,9 @@ namespace IssueTracker.Test
             var issue = _issueRepository.GetById(issueId);
             Assert.Equal(issueId, issue.Id);
             Assert.Equal(state, (IssueStateDto)issue.State);
-            var expectedTransition = new StateTransition(IssueState.ToDo, issue.State, _time.GetUtcNow());
-            Assert.Equal(expectedTransition, issue.StateHistory[0]);
+            Assert.Equal(_time.GetUtcNow(), issue.StateHistory[0].CreatedAt);
+            Assert.Equal(IssueState.ToDo, issue.StateHistory[0].From);
+            Assert.Equal(IssueState.InProgress, issue.StateHistory[0].To);
             Assert.Equal(comment, issue.Comments[0].Text);
         }
 
@@ -82,22 +83,35 @@ namespace IssueTracker.Test
         public void AssignUser()
         {
             //ARRANGE
+            var name = "Steve";
             var issueId = _issueService.AddIssue("Issue1");
+            var user = _userRepository.Create(new User(name));
 
             //ACT
-            _issueService.AssignUser();
+            _issueService.AssignUser(user.Id, issueId);
 
             //ASSERT
+            var issue = _issueRepository.GetById(issueId);
+            Assert.Equal(issueId, issue.Id);
+            Assert.Equal(user.Id, issue.AssignedUser.Id);
+            Assert.Equal(name, issue.AssignedUser.Name);
         }
 
         [Fact]
         public void AddIssueComment()
         {
             //ARRANGE
+            var comment = "new comment";
+            var title = "Issue1";
+            var issueId = _issueService.AddIssue(title);
 
             //ACT
+            _issueService.AddIssueComment(issueId, comment);
 
             //ASSERT
+            var comments = _issueRepository.GetById(issueId).Comments;
+            Assert.Single(comments);
+            Assert.Equal(comment, comments[0].Text);
         }
 
         [Fact]
