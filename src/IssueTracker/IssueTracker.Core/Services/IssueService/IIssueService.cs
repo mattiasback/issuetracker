@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IssueTracker.Core.Services.IssueService
 {
-    interface IIssueService
+    public interface IIssueService
     {
         /// <summary>
         /// Add an issue with the given title.
@@ -24,7 +24,7 @@ namespace IssueTracker.Core.Services.IssueService
         /// <param name="issueId">Unique identifier of the issue.</param>
         /// <param name="state">State which the issue shall transition to.</param>
         /// <param name="comment">Optional comment.</param>
-        void SetIssueState(Guid issueId, IssueState state, string comment = null);
+        void SetIssueState(Guid issueId, IssueStateDto state, string comment = null);
 
         /// <summary>
         /// Assign a user to an issue.
@@ -50,7 +50,7 @@ namespace IssueTracker.Core.Services.IssueService
         /// <param name="endDate">Optional end date filter.</param>
         /// <returns>Returns a list of issues based on the selected filtering.
         /// An empty list is returned if no issues found.</returns>
-        IList<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
+        IList<IssueDto> GetIssues(IssueStateDto? state = null, Guid? userId = null, 
             DateTime? startDate = null, DateTime? endDate = null);
 
         /// <summary>

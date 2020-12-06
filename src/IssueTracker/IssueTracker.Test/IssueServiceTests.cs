@@ -1,9 +1,8 @@
 using System;
+using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 using IssueTracker.Core.Services;
 using IssueTracker.Core.Services.IssueService;
-using IssueTracker.Core.Services.IssueService.Impl;
-using IssueTracker.Data.Repositories;
 using Xunit;
 
 namespace IssueTracker.Test
@@ -62,7 +61,7 @@ namespace IssueTracker.Test
         public void SetIssueState()
         {
             //ARRANGE
-            var state = IssueState.InProgress;
+            var state = IssueStateDto.InProgress;
             var title = "Issue1";
             var comment = "In progress!";
             var issueId = _issueService.AddIssue(title);
@@ -73,7 +72,7 @@ namespace IssueTracker.Test
             //ASSERT
             var issue = _issueRepository.GetById(issueId);
             Assert.Equal(issueId, issue.Id);
-            Assert.Equal(state, issue.State);
+            Assert.Equal(state, (IssueStateDto)issue.State);
             //var expectedTransition = new StateTransition(IssueState.ToDo, state, _time.GetUtcNow()
             //Assert.Equal(), issue.StateHistory[0]);
             Assert.Equal(comment, issue.Comments[0].Text);

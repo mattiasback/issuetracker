@@ -4,7 +4,7 @@ using System.Linq;
 using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Core.Services.IssueService.Impl
+namespace IssueTracker.Core.Services.IssueService
 {
     class IssueService : IIssueService
     {
@@ -30,13 +30,13 @@ namespace IssueTracker.Core.Services.IssueService.Impl
             _issueRepository.Delete(issueId);
         }
 
-        public void SetIssueState(Guid issueId, IssueState state, string comment = null)
+        public void SetIssueState(Guid issueId, IssueStateDto state, string comment = null)
         {
             var issue = _issueRepository.GetById(issueId);
             var oldState = issue.State;
-            issue.State = state;
+            issue.State = (IssueState)state;
             issue.Comments.Add(new Comment(comment, _time.GetUtcNow()));
-            issue.StateHistory.Add(new StateTransition(oldState, state, _time.GetUtcNow()));
+            issue.StateHistory.Add(new StateTransition(oldState, issue.State, _time.GetUtcNow()));
             _issueRepository.Update(issue);
         }
 
@@ -54,7 +54,7 @@ namespace IssueTracker.Core.Services.IssueService.Impl
             _issueRepository.Update(issue);
         }
 
-        public IList<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
+        public IList<IssueDto> GetIssues(IssueStateDto? state = null, Guid? userId = null, 
             DateTime? startDate = null, DateTime? endDate = null)
         {
             var issues = _issueRepository.GetAll();
@@ -63,7 +63,7 @@ namespace IssueTracker.Core.Services.IssueService.Impl
                 issues = issues.Where(i => i.AssignedUser.Id == userId);
 
             if (state != null)
-                issues = issues.Where(i => i.State == state);
+                issues = issues.Where(i => i.State == (IssueState)state);
 
             if (startDate != null)
                 issues = issues.Where(i => i.CreatedAt.Date >= startDate.Value.Date);

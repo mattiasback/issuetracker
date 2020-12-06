@@ -4,18 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker", "IssueTracker\IssueTracker.csproj", "{0B1B14F5-0DF6-488B-8679-C2634CD9EEA3}"
-	ProjectSection(ProjectDependencies) = postProject
-		{934F1671-6321-4274-861E-0127EBE8D12C} = {934F1671-6321-4274-861E-0127EBE8D12C}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Core", "IssueTracker.Core\IssueTracker.Core.csproj", "{8DC97B0E-C354-4726-B205-C37B50945C61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Data", "IssueTracker.Data\IssueTracker.Data.csproj", "{934F1671-6321-4274-861E-0127EBE8D12C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IssueTracker.Test", "IssueTracker.Test\IssueTracker.Test.csproj", "{2E403E07-2F21-4185-B664-CDE8217E4DDE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{934F1671-6321-4274-861E-0127EBE8D12C} = {934F1671-6321-4274-861E-0127EBE8D12C}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +23,6 @@ Global
 		{8DC97B0E-C354-4726-B205-C37B50945C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DC97B0E-C354-4726-B205-C37B50945C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DC97B0E-C354-4726-B205-C37B50945C61}.Release|Any CPU.Build.0 = Release|Any CPU
-		{934F1671-6321-4274-861E-0127EBE8D12C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{934F1671-6321-4274-861E-0127EBE8D12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{934F1671-6321-4274-861E-0127EBE8D12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{934F1671-6321-4274-861E-0127EBE8D12C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E403E07-2F21-4185-B664-CDE8217E4DDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E403E07-2F21-4185-B664-CDE8217E4DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E403E07-2F21-4185-B664-CDE8217E4DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU

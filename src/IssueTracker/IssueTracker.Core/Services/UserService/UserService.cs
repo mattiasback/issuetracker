@@ -4,7 +4,7 @@ using System.Linq;
 using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Core.Services.UserService.Impl
+namespace IssueTracker.Core.Services.UserService
 {
     class UserService : IUserService
     {

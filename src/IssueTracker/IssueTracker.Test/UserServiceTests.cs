@@ -1,7 +1,5 @@
 using IssueTracker.Core.Repositories;
 using IssueTracker.Core.Services.UserService;
-using IssueTracker.Core.Services.UserService.Impl;
-using IssueTracker.Data.Repositories;
 using Xunit;
 
 namespace IssueTracker.Test

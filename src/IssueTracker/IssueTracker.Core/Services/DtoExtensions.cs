@@ -20,7 +20,7 @@ namespace IssueTracker.Core.Services
             return new IssueDto()
             {
                 IssueId = issue.Id,
-                State = (int)issue.State,
+                State = issue.State.ToString(),
                 CreatedAt = issue.CreatedAt,
                 Title = issue.Title,
                 AssignedUserId = issue.AssignedUser.Id,

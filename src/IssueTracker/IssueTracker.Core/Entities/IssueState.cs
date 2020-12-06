@@ -1,4 +1,4 @@
-﻿namespace IssueTracker.Core.Services.IssueService
+﻿namespace IssueTracker.Core.Entities
 {
     public enum IssueState
     {

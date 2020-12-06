@@ -1,10 +1,8 @@
 using System.Linq;
+using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 using IssueTracker.Core.Services.IssueService;
-using IssueTracker.Core.Services.IssueService.Impl;
 using IssueTracker.Core.Services.UserService;
-using IssueTracker.Core.Services.UserService.Impl;
-using IssueTracker.Data.Repositories;
 using Xunit;
 
 namespace IssueTracker.Test
@@ -30,7 +28,7 @@ namespace IssueTracker.Test
             //ARRANGE
             var name = "Steve";
             var title = "The app crashes on login.";
-            var state = IssueState.InProgress;
+            var state = IssueStateDto.InProgress;
             var comment = "I'm on it!";
 
             //ACT
@@ -44,7 +42,7 @@ namespace IssueTracker.Test
             Assert.Equal(userId, issue.AssignedUser.Id);
             Assert.Equal(name, issue.AssignedUser.Name);
             Assert.Equal(title, issue.Title);
-            Assert.Equal(state, issue.State);
+            Assert.Equal(state, (IssueStateDto)issue.State);
             Assert.Equal(comment, issue.Comments.First().Text);
         }
 
