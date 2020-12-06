@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using IssueTracker.Core.Entities;
+﻿using IssueTracker.Core.Entities;
 using IssueTracker.Core.Services.IssueService;
 using IssueTracker.Core.Services.UserService;
 
@@ -12,8 +11,7 @@ namespace IssueTracker.Core.Services
             return new UserDto()
             {
                 UserId = user.Id,
-                Name = user.Name,
-                AssignedIssues = user.AssignedIssues.Select(i => i.MapToDto()).ToList()
+                Name = user.Name
             };
         }
 

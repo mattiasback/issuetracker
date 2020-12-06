@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IssueTracker.Core.Services.IssueService
 {
-    public interface IIssueService
+    interface IIssueService
     {
         /// <summary>
         /// Add an issue with the given title.
@@ -50,8 +50,8 @@ namespace IssueTracker.Core.Services.IssueService
         /// <param name="endDate">Optional end date filter.</param>
         /// <returns>Returns a list of issues based on the selected filtering.
         /// An empty list is returned if no issues found.</returns>
-        IEnumerable<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
-            DateTimeOffset? startDate = null, DateTimeOffset? endDate = null);
+        IList<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
+            DateTime? startDate = null, DateTime? endDate = null);
 
         /// <summary>
         /// Get a specific issue matching the unique identifier provided.

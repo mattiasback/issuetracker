@@ -6,16 +6,16 @@ namespace IssueTracker.Core.Entities
 {
     class Issue : EntityBase
     {
-        public Issue(string title)
+        public Issue(string title, DateTime createdAt)
         {
-            CreatedAt = DateTimeOffset.UtcNow;
-            State = IssueState.ToDo;
+            CreatedAt = createdAt;
             Title = title;
+            State = IssueState.ToDo;
         }
 
-        public DateTimeOffset CreatedAt { get; }
+        public DateTime CreatedAt { get; }
+        public string Title { get; }
         public IssueState State { get; set; }
-        public string Title { get; set; }
         public User AssignedUser { get; set; }
         public IList<Comment> Comments { get; set; } = new List<Comment>();
         public IList<StateTransition> StateHistory { get; set; } = new List<StateTransition>();

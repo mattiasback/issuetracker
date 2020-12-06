@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IssueTracker.Core.Services.UserService
 {
-    public interface IUserService
+    interface IUserService
     {
         /// <summary>
         /// Add a user by name.
@@ -23,7 +23,7 @@ namespace IssueTracker.Core.Services.UserService
         /// </summary>
         /// <returns>A collection of all users.
         /// An empty list is returned if no users found.</returns>
-        IEnumerable<UserDto> GetUsers();
+        IList<UserDto> GetUsers();
 
         /// <summary>
         /// Get a specific user matching the unique identifier provided.

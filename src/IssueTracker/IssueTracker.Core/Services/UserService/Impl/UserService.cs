@@ -26,9 +26,9 @@ namespace IssueTracker.Core.Services.UserService.Impl
             _repository.Delete(userId);
         }
 
-        public IEnumerable<UserDto> GetUsers()
+        public IList<UserDto> GetUsers()
         {
-            return _repository.GetAll().Select(u => u.MapToDto());
+            return _repository.GetAll().Select(u => u.MapToDto()).ToList();
         }
 
         public UserDto GetUser(Guid userId)

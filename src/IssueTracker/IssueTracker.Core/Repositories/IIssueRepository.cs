@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IssueTracker.Core.Entities;
+﻿using IssueTracker.Core.Entities;
 
 namespace IssueTracker.Core.Repositories
 {

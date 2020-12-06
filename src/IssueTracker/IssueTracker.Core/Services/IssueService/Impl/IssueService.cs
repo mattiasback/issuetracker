@@ -10,16 +10,18 @@ namespace IssueTracker.Core.Services.IssueService.Impl
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ITimeProvider _time;
 
-        public IssueService(IIssueRepository issueRepository, IUserRepository userRepository)
+        public IssueService(IIssueRepository issueRepository, IUserRepository userRepository, ITimeProvider timeProvider)
         {
             _issueRepository = issueRepository;
             _userRepository = userRepository;
+            _time = timeProvider;
         }
 
         public Guid AddIssue(string title)
         {
-            var issue = new Issue(title);
+            var issue = new Issue(title, _time.GetUtcNow());
             return _issueRepository.Create(issue).Id;
         }
 
@@ -33,8 +35,8 @@ namespace IssueTracker.Core.Services.IssueService.Impl
             var issue = _issueRepository.GetById(issueId);
             var oldState = issue.State;
             issue.State = state;
-            issue.Comments.Add(new Comment(comment));
-            issue.StateHistory.Add(new StateTransition(oldState, state));
+            issue.Comments.Add(new Comment(comment, _time.GetUtcNow()));
+            issue.StateHistory.Add(new StateTransition(oldState, state, _time.GetUtcNow()));
             _issueRepository.Update(issue);
         }
 
@@ -48,12 +50,12 @@ namespace IssueTracker.Core.Services.IssueService.Impl
         public void AddIssueComment(Guid issueId, string comment)
         {
             var issue = _issueRepository.GetById(issueId);
-            issue.Comments.Add(new Comment(comment));
+            issue.Comments.Add(new Comment(comment, _time.GetUtcNow()));
             _issueRepository.Update(issue);
         }
 
-        public IEnumerable<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
-            DateTimeOffset? startDate = null, DateTimeOffset? endDate = null)
+        public IList<IssueDto> GetIssues(IssueState? state = null, Guid? userId = null, 
+            DateTime? startDate = null, DateTime? endDate = null)
         {
             var issues = _issueRepository.GetAll();
 
@@ -69,7 +71,7 @@ namespace IssueTracker.Core.Services.IssueService.Impl
             if (endDate != null)
                 issues = issues.Where(i => i.CreatedAt.Date < endDate.Value.Date);
 
-            return issues.Select(i => i.MapToDto());
+            return issues.Select(i => i.MapToDto()).ToList();
         }
 
         public IssueDto GetIssue(Guid issueId)

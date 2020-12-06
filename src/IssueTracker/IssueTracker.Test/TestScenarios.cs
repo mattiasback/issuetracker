@@ -9,25 +9,25 @@ using Xunit;
 
 namespace IssueTracker.Test
 {
-    public class IssueTests
+    public class TestScenarios
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IUserRepository _userRepository;
         private readonly IIssueService _issueService;
         private readonly IUserService _userService;
 
-        public IssueTests()
+        public TestScenarios()
         {
             _issueRepository = new IssueRepository();
             _userRepository = new UserRepository();
-            _issueService = new IssueService(_issueRepository, _userRepository);
+            _issueService = new IssueService(_issueRepository, _userRepository, new FakeTimeProvider());
             _userService = new UserService(_userRepository);
         }
 
         [Fact]
         public void TestScenario1()
         {
-            //ASSIGN
+            //ARRANGE
             var name = "Steve";
             var title = "The app crashes on login.";
             var state = IssueState.InProgress;
@@ -48,10 +48,6 @@ namespace IssueTracker.Test
             Assert.Equal(comment, issue.Comments.First().Text);
         }
 
-        [Fact]
-        public void AddIssue()
-        {
-            _issueService.AddIssue("Issue 1");
-        }
+        
     }
 }

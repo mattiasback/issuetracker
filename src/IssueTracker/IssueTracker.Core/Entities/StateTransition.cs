@@ -5,14 +5,14 @@ namespace IssueTracker.Core.Entities
 {
     class StateTransition
     {
-        public StateTransition(IssueState from, IssueState to)
+        public StateTransition(IssueState from, IssueState to, DateTime createdAt)
         {
-            CreatedAt = DateTimeOffset.UtcNow;
             From = from;
-            To = To;
+            To = to;
+            CreatedAt = createdAt;
         }
 
-        public DateTimeOffset CreatedAt { get; }
+        public DateTime CreatedAt { get; }
         public IssueState From { get; }
         public IssueState To { get; }
     }

@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IssueTracker.Core.Entities
 {
     class Comment : EntityBase
     {
-        public Comment(string text)
+        public Comment(string text, DateTime createdAt)
         {
-            CreatedAt = DateTimeOffset.UtcNow;
             Text = text;
+            CreatedAt = createdAt;
         }
 
-        public string Text { get; set; }
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTime CreatedAt { get; }
+        public string Text { get; }
     }
 }
