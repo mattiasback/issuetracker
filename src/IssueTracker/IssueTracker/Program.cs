@@ -1,11 +1,6 @@
 ﻿using System;
-using IssueTracker.Core.Repositories;
-using IssueTracker.Core.Services;
+using IssueTracker.Core;
 using IssueTracker.Core.Services.IssueService;
-using IssueTracker.Core.Services.IssueService.Impl;
-using IssueTracker.Core.Services.UserService;
-using IssueTracker.Core.Services.UserService.Impl;
-using IssueTracker.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace IssueTracker
@@ -14,21 +9,31 @@ namespace IssueTracker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Issue Tracker Engine");
+            Console.WriteLine("Issue Tracker Console App");
 
             //Setup DI
             var serviceProvider = new ServiceCollection()
-                .AddSingleton<IIssueService, IssueService>()
-                .AddSingleton<IUserService, UserService>()
-                .AddSingleton<IIssueRepository, IssueRepository>()
-                .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<ITimeProvider, TimeProvider>()
+                .AddIssueTracker()
                 .BuildServiceProvider();
 
-            //TODO this could be expanded if a UI is desired, but currently xUnit is used for 
-            //testing all operations
-            var issueService = serviceProvider.GetService<IIssueService>();
-            var issueId = issueService.AddIssue("Issue1");
+            //Example usage
+            var example = new ExampleClass(serviceProvider.GetService<IIssueService>());
+            var issueId = example.AddIssue("Issue1");
+        }
+
+        class ExampleClass
+        {
+            private readonly IIssueService _service;
+
+            public ExampleClass(IIssueService service)
+            {
+                _service = service;
+            }
+
+            public Guid AddIssue(string title)
+            {
+                return _service.AddIssue(title);
+            }
         }
     }
 }

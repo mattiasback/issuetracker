@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using IssueTracker.Core.Entities;
-using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Data.Repositories
+namespace IssueTracker.Core.Repositories
 {
     class RepositoryBase<T> : IRepository<T> where T : EntityBase
     {

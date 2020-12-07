@@ -4,7 +4,7 @@ using System.Linq;
 using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Core.Services.UserService.Impl
+namespace IssueTracker.Core.Services.UserService
 {
     class UserService : IUserService
     {
@@ -17,8 +17,7 @@ namespace IssueTracker.Core.Services.UserService.Impl
 
         public Guid AddUser(string name)
         {
-            var user = new User {Name = name};
-            return _repository.Create(user).Id;
+            return _repository.Create(new User(name)).Id;
         }
 
         public void RemoveUser(Guid userId)

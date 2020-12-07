@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace IssueTracker.Core.Services.UserService
 {
-    interface IUserService
+    public interface IUserService
     {
         /// <summary>
         /// Add a user by name.

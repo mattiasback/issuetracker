@@ -1,7 +1,6 @@
 ﻿using IssueTracker.Core.Entities;
-using IssueTracker.Core.Repositories;
 
-namespace IssueTracker.Data.Repositories
+namespace IssueTracker.Core.Repositories
 {
     class UserRepository : RepositoryBase<User>, IUserRepository
     {
