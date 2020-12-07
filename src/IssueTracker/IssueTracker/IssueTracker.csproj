@@ -10,9 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="IssueTracker.Core">
-      <HintPath>..\IssueTracker.Core\bin\Debug\netstandard2.0\IssueTracker.Core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\IssueTracker.Core\IssueTracker.Core.csproj" />
   </ItemGroup>
 
 </Project>
