@@ -9,7 +9,7 @@ namespace IssueTracker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("External consumer using issue tracker library");
+            Console.WriteLine("Issue Tracker Console App");
 
             //Setup DI
             var serviceProvider = new ServiceCollection()
