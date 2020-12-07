@@ -118,10 +118,15 @@ namespace IssueTracker.Test
         public void GetIssues()
         {
             //ARRANGE
+            _issueService.AddIssue("Issue1");
+            _issueService.AddIssue("Issue2");
+            _issueService.AddIssue("Issue3");
 
             //ACT
+            var issues = _issueService.GetIssues();
 
             //ASSERT
+            Assert.Equal(3, issues.Count);
         }
 
         [Fact]
