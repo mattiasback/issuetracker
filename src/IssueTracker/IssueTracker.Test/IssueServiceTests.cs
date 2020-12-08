@@ -39,7 +39,7 @@ namespace IssueTracker.Test
             Assert.Empty(issue.Comments);
             Assert.Empty(issue.StateHistory);
             Assert.Null(issue.AssignedUser);
-            Assert.Equal(DateTime.UtcNow.Date, issue.CreatedAt.Date);
+            Assert.Equal(_time.GetUtcNow(), issue.CreatedAt);
         }
 
         [Fact]
