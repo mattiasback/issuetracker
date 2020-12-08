@@ -9,6 +9,6 @@ namespace IssueTracker.Core.Services
 
     class TimeProvider : ITimeProvider
     {
-        public DateTime GetUtcNow() => DateTime.UtcNow;
+        public virtual DateTime GetUtcNow() => DateTime.UtcNow;
     }
 }

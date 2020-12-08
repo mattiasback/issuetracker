@@ -1,5 +1,4 @@
 ﻿using System;
-using IssueTracker.Core.Services.IssueService;
 
 namespace IssueTracker.Core.Entities
 {

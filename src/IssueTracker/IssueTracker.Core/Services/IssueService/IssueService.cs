@@ -60,16 +60,16 @@ namespace IssueTracker.Core.Services.IssueService
             var issues = _issueRepository.GetAll();
 
             if (userId != null)
-                issues = issues.Where(i => i.AssignedUser.Id == userId);
+                issues = issues.Where(i => i.AssignedUser?.Id == userId);
 
             if (state != null)
                 issues = issues.Where(i => i.State == (IssueState)state);
 
             if (startDate != null)
-                issues = issues.Where(i => i.CreatedAt.Date >= startDate.Value.Date);
+                issues = issues.Where(i => i.CreatedAt >= startDate.Value);
 
             if (endDate != null)
-                issues = issues.Where(i => i.CreatedAt.Date < endDate.Value.Date);
+                issues = issues.Where(i => i.CreatedAt < endDate.Value);
 
             return issues.Select(i => i.MapToDto()).ToList();
         }

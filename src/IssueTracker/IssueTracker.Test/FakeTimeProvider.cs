@@ -3,7 +3,7 @@ using IssueTracker.Core.Services;
 
 namespace IssueTracker.Test
 {
-    public class FakeTimeProvider : ITimeProvider
+    class FakeTimeProvider : TimeProvider
     {
         private DateTime _now;
 
@@ -12,7 +12,7 @@ namespace IssueTracker.Test
             _now = DateTime.UtcNow;
         }
 
-        public DateTime GetUtcNow() => _now;
+        public override DateTime GetUtcNow() => _now;
         public void SetUtcNow(DateTime time) => _now = time;
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace IssueTracker.Core.Entities
+﻿namespace IssueTracker.Core.Entities
 {
     class User : EntityBase
     {

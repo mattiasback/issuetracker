@@ -2,7 +2,7 @@
 
 namespace IssueTracker.Core.Entities
 {
-    class Comment : EntityBase
+    class Comment
     {
         public Comment(string text, DateTime createdAt)
         {

@@ -1,4 +1,5 @@
-﻿using IssueTracker.Core.Entities;
+﻿using System;
+using IssueTracker.Core.Entities;
 using IssueTracker.Core.Services.IssueService;
 using IssueTracker.Core.Services.UserService;
 
@@ -23,8 +24,8 @@ namespace IssueTracker.Core.Services
                 State = (IssueStateDto)issue.State,
                 CreatedAt = issue.CreatedAt,
                 Title = issue.Title,
-                AssignedUserId = issue.AssignedUser.Id,
-                AssignedUserName = issue.AssignedUser.Name
+                AssignedUserId = issue.AssignedUser?.Id ?? Guid.Empty,
+                AssignedUserName = issue.AssignedUser?.Name
             };
         }
     }

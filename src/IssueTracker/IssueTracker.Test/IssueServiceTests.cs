@@ -1,7 +1,6 @@
 using System;
 using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
-using IssueTracker.Core.Services;
 using IssueTracker.Core.Services.IssueService;
 using Xunit;
 
@@ -12,7 +11,7 @@ namespace IssueTracker.Test
         private readonly IIssueRepository _issueRepository;
         private readonly IUserRepository _userRepository;
         private readonly IIssueService _issueService;
-        private readonly ITimeProvider _time;
+        private readonly FakeTimeProvider _time;
 
         public IssueTests()
         {
@@ -133,10 +132,13 @@ namespace IssueTracker.Test
         public void GetIssue()
         {
             //ARRANGE
+            var issueId = _issueService.AddIssue("Issue1");
 
             //ACT
+            var issue = _issueRepository.GetById(issueId);
 
             //ASSERT
+            Assert.Equal(issueId, issue.Id);
         }
     }
 }

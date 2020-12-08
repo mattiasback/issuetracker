@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using IssueTracker.Core.Services.IssueService;
 
 namespace IssueTracker.Core.Entities
 {
