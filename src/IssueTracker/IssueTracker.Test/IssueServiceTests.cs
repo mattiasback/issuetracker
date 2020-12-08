@@ -1,4 +1,3 @@
-using System;
 using IssueTracker.Core.Entities;
 using IssueTracker.Core.Repositories;
 using IssueTracker.Core.Services.IssueService;
